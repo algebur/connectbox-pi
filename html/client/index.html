@@ -7,6 +7,7 @@
         <link type="text/css" rel="stylesheet" href="lib/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="lib/font-awesome.min.css" />
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             .ng-cloak { display: none !important; }
             table.table tr a { display: block; }
@@ -25,16 +26,25 @@
                 top: 1.25em;
             }
 
+            body {
+                background: #E9EBEE;
+}
+
             .home-icon-container {
-                width: 65px;
-                height: 70px;
+               
+                text-align: center;
+
+                
             }
 
             .home-icon-container img {
-              display: block;
-              width: 100%;
-              height: auto;
+                display: block;
+                max-width: 100%;
+                
+                margin: auto;
+                
             }
+
 
             .subfolder-icon-container {
                 margin-left: 5px;
@@ -50,66 +60,227 @@
               height: auto;
             }
 
-            .breadcrumb {
-                background-color: #CCEFEB;
+          
+
+
+            @media screen and (max-width: 499px) {
+                .breadcrumb {
+                    background-color: #253990;
+                    padding: 8px 25px !important;
+                    border-radius: 0px !important;
+                }
+            }
+
+
+            @media screen and (min-width: 500px) {
+                .breadcrumb {
+                    background-color: #253990;
+                    padding: 8px 70px !important;
+                    border-radius: 0px !important;
+                }
+            }
+
+
+            .breadcrumb>.active {
+                color: white;
+                
             }
 
             .centered {
                 text-align: center;
             }
 
-            /* Top-level collapsed table */
-            table.collapsed {
-                background-color: #CCEFEB;
-            }
-            table.collapsed span.row_name {
-                display: none;
-            }
-            table span.directory {
-                font-weight: bold;
-            }
-            table.collapsed > tbody > tr {
-                float: left;
-            }
-            table.collapsed > tbody td {
-                padding: 10px !important;
-                line-height: normal !important;
-                vertical-align: bottom;
-                border-top: 0 !important;
-            }
+
             a {
                 text-decoration: none !important;
+                color: #253990 !important;
             }
-}
+
+            .fa-5x {
+                font-size: 13em !important;
+                color: white;
+                line-height: 1.2em;
+                margin: 17px;
+                
+                }
+
+            .fa-lg {
+                font-size: 3em !important;
+                color: white;
+            }
+            .fa.fa-refresh {
+                font-size: 2em !important;
+                color: white;
+            }
+          
+            @media screen and (min-width: 600px) {
+                .toplevel {
+                    margin-top: 15px;
+                    margin-left:  150px;
+                    line-height: 2;
+
+                }
+
+            }
+
+            @media screen and (max-width: 599px) {
+                .toplevel {
+                    margin-top: 15px;
+                    margin-left:  15px;
+                    line-height: 2;
+                }
+
+            }
+
+            .fa-level-up {
+                font-size: 2em;
+
+            }
+            .icons {
+                background-image: linear-gradient(rgb(65, 91, 209) 0%, rgb(22, 38, 108) 100%);
+                
+                max-height: 100%;
+                width: 252px;
+            }
+            
+            .newstyle {
+                display: inline;
+                float: left;
+                margin: 10px;
+            }
+
+          
+        
+            @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+                .listfiles {
+                    
+                    font-size: 1em;
+                }
+
+                .icons-container {
+                    
+                    margin: 0 10%;
+                    margin-top: 10px;
+                    
+                }
+            }
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+                .listfiles {
+                    
+                    font-size: 1em;
+                }
+
+                .icons-container {
+                    
+                    margin: 0 14%;
+                    margin-top: 10px;
+                    
+                }
+            }
+
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+                .listfiles {
+                    
+                    font-size: 1em;
+                }
+
+                .icons-container {
+                    
+                    margin: 0 10%;
+                    margin-top: 10px;
+                    
+                }
+            }
+
+            @media only screen and (min-width: 1224px) {
+                .listfiles {
+                    
+                    font-size: 1em;
+                }
+
+                .icons-container {
+                    
+                    margin: 0 6.5%;
+                    margin-top: 10px;
+                    
+                }
+            }
+             @media only screen and (min-width: 1824px) {
+                .listfiles {
+                    
+                    font-size: 1em;
+                }
+
+                .icons-container {
+                    
+                    margin: 0 10%;
+                    margin-top: 10px;
+                    
+                }
+            }
+            
+
+            @media screen and (min-width: 800px) {
+                .listfiles {
+                    
+                    font-size: 1.5em;
+                }
+           }
+
+           
+            
         </style>
     </head>
     <script type='text/ng-template' id="fileRenderer"> 
-        <td ng-class="::{'centered': row.isTopLevel}">
-            <a href="{{:: row.type == 'directory' ? '#' : index.config.Content.contentRoute }}{{:: index.path }}/{{:: row.name }}">
-                <i ng-hide="row.icon_file" class="fa {{:: row | topLevelCategory }}"></i>
-                <div ng-if="row.icon_file && row.isTopLevel" class="home-icon-container">
-                    <img ng-src="{{:: index.config.Content.contentRoute}}{{:: index.path }}/{{:: row.icon_file}}" />
-                </div>
-                <span ng-if="row.isTopLevel && index.config.Client.display_root_folder_names">
-                    <br ng-if="!row.icon_file && row.isTopLevel"/>
-                    {{:: row.name }}
-                </span>
-                <i ng-hide="row.isTopLevel || row.icon_file" class="fa {{:: row | mediaTypes }}"></i>
-                <div ng-hide="row.isTopLevel" ng-if="row.icon_file" class="subfolder-icon-container">
-                    <img ng-src="{{:: index.config.Content.contentRoute}}{{:: index.path }}/{{:: row.icon_file}}"/>
-                </div>
-                <span ng-class="::{'row_name': !index.config.Client.display_root_folder_names, 'directory': row.type == 'directory'}">
-                    <span ng-if="!row.isTopLevel">&nbsp;{{:: row.name }}</span>
-                </span>
-            </a>
-        </td>
-    </script>
+        
+        <div class="icons-container">
+            <div ng-if="row.isTopLevel" class="newstyle">
+                
+                    <div class="icons">
+                        <div ng-class="::{'centered': row.isTopLevel}">
+                            
+                            <a href="{{:: row.type == 'directory' ? '#' : index.config.Content.contentRoute }}{{:: index.path }}/{{:: row.name }}">
+                                <i ng-hide="row.icon_file" class="fa {{:: row | topLevelCategory }}"></i>
+                                <div ng-if="row.icon_file && row.isTopLevel" class="home-icon-container">
+                                    <img ng-src="{{:: index.config.Content.contentRoute}}{{:: index.path }}/{{:: row.icon_file}}" />
+                                </div>
+                               
 
-    <body style="margin: 10px 20px">
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+            </div>
+           
+        </div>
+
+    </script>
+    
+    <script type='text/ng-template' id="fileRenderer1">
+            
+               
+                        <div ng-class="::{'centered': row.isTopLevel}">
+                            <a class="listfiles" href="{{:: row.type == 'directory' ? '#' : index.config.Content.contentRoute }}{{:: index.path }}/{{:: row.name }}">
+                                
+                                <i ng-hide="row.isTopLevel || row.icon_file" class="fa {{:: row | mediaTypes }}"></i>
+                                <div ng-hide="row.isTopLevel" ng-if="row.icon_file" class="subfolder-icon-container">
+                                        <img ng-src="{{:: index.config.Content.contentRoute}}{{:: index.path }}/{{:: row.icon_file}}"/>
+                                </div>
+                                <span ng-class="::{'row_name': !index.config.Client.display_root_folder_names, 'directory': row.type == 'directory'}">
+                                        <span ng-if="!row.isTopLevel">&nbsp;{{:: row.name }}</span>
+                                </span>
+                               
+                            </a>
+                        </div>
+                    
+           
+    </script>
+    <body style="margin: 0px 0px">
         <div ng-controller="ScrollToTopController as scroll" class="pull-right" id="scroll-to-top" ng-show="scroll.show"><a href="" ng-click="scroll.to_top(); $event.preventDefault()"><i class="fa fa-long-arrow-up"></i> to top</a></div>
         <div ng-controller="IndexController as index" class="container-fluid ng-cloak">
             <div class="row">
-                <ol class="breadcrumb" style="left: 20px; right: 20px; position: fixed; z-index: 1000;">
+                <ol class="breadcrumb" style="left: 0px; right: 0px; position: fixed; z-index: 1000;">
                     <li>
                         <a href="" ng-click="index.reload()" title="Reload">
                             <i ng-class="{'loader': index.reloading.running || index.loading.running}" class="fa fa-refresh"></i>
@@ -126,29 +297,63 @@
             </div>
 
             <div class="row" style="margin-top: 3em;" ng-hide="index.error">
-                <div class="table-responsive">
-                <table class="table" ng-class="index.isTopLevel ? 'collapsed':''">
-                    <tbody>
-                        <tr ng-hide="index.path == '' || index.path == '/'">
-                            <td ng-click="index.go_up()"><a href=""><i class="fa fa-level-up"></i> ..</a></td>
-                        </tr>
-                        <tr ng-repeat="row in index.files | orderBy:index.sort.name:index.sort.rev"
+                <div>
+                <div ng-class="index.isTopLevel ? 'collapsed':''">
+                    <div>
+                        
+                        
+                        <div ng-repeat="row in index.files | orderBy:index.sort.name:index.sort.rev"
                             ng-include="'fileRenderer'">
-                        </tr>
-                    </tbody>
-                </table>
+                        </div>
+                        
+                    </div>
+                </div>
                 </div>
             </div>
 
             <div class="row" ng-hide="index.error || !index.topLevelFiles || !index.isTopLevel">
-                <div class="table-responsive">
-                <table class="table">
-                    <tbody>
-                        <tr ng-repeat="row in index.topLevelFiles | orderBy:index.sort.name:index.sort.rev"
+                <div>
+                <div>
+                    <div>
+                        <div ng-repeat="row in index.topLevelFiles | orderBy:index.sort.name:index.sort.rev"
                             ng-include="'fileRenderer'">
-                        </tr>
-                    </tbody>
-                </table>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 0em;" ng-hide="index.error">
+                <div>
+                <div ng-class="index.isTopLevel ? 'collapsed':''">
+                    <div>
+                        <div class="toplevel" ng-hide="index.path == '' || index.path == '/'">
+                            <div ng-click="index.go_up()"><a href=""><i class="fa fa-level-up"></i> ..</a>
+
+                            </div>
+                            <div ng-repeat="row in index.files | orderBy:index.sort.name:index.sort.rev" ng-include="'fileRenderer1'" class="filelist">
+                            
+                            </div>
+
+
+                        </div>
+                        
+                       
+                        
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row" ng-hide="index.error || !index.topLevelFiles || !index.isTopLevel">
+                <div>
+                <div>
+                    <div>
+                        <div ng-repeat="row in index.topLevelFiles | orderBy:index.sort.name:index.sort.rev"
+                            ng-include="'fileRenderer1'">
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
 
