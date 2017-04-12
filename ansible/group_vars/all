@@ -112,7 +112,7 @@ nginx_vhosts:
       }
 
       location /content/ {
-        alias {{ connectbox_usb_files_root }}/;
+        alias {{ connectbox_usb_files_root }}/share/;
         autoindex on;
         autoindex_format json;
         charset utf-8;
